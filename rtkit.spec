@@ -1,6 +1,6 @@
 Name:          rtkit
 Version:       0.5
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       Realtime Policy and Watchdog Daemon
 Group:         System Environment/Base
 # The daemon itself is GPLv3+, the reference implementation for the client BSD
@@ -13,6 +13,7 @@ BuildRequires: dbus-devel >= 1.2
 BuildRequires: libcap-devel
 BuildRequires: polkit-devel
 Source0:       http://0pointer.de/public/%{name}-%{version}.tar.gz
+Patch0:        0001-SECURITY-Pass-uid-of-caller-to-polkit.patch
 
 %description
 RealtimeKit is a D-Bus system service that changes the
@@ -23,6 +24,7 @@ processes.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %configure
@@ -57,6 +59,10 @@ dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesk
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.RealtimeKit1.conf
 
 %changelog
+* Mon Sep 23 2013 Colin Walters <walters@redhat.com> - 0.5-2
+- CVE-2013-4326
+  Resolves: #1007174
+
 * Fri Dec 18 2009 Lennart Poettering <lpoetter@redhat.com> - 0.5-1
 - New release
 - By default don't demote unknown threads
