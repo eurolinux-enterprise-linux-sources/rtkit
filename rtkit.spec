@@ -1,6 +1,6 @@
 Name:             rtkit
 Version:          0.11
-Release:          6%{?dist}
+Release:          8%{?dist}
 Summary:          Realtime Policy and Watchdog Daemon
 Group:            System Environment/Base
 # The daemon itself is GPLv3+, the reference implementation for the client BSD
@@ -79,6 +79,12 @@ dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesk
 %{_mandir}/man8/*
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.11-8
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.11-7
+- Mass rebuild 2013-12-27
+
 * Mon Sep 23 2013 Colin Walters <walters@redhat.com> - 0.11-6
 - CVE-2013-4326
   Resolves: #1005140
