@@ -1,8 +1,6 @@
-%global _hardened_build 1
-
 Name:             rtkit
 Version:          0.11
-Release:          10%{?dist}
+Release:          6%{?dist}
 Summary:          Realtime Policy and Watchdog Daemon
 Group:            System Environment/Base
 # The daemon itself is GPLv3+, the reference implementation for the client BSD
@@ -20,7 +18,6 @@ BuildRequires:    autoconf automake libtool
 Source0:          http://0pointer.de/public/%{name}-%{version}.tar.xz
 Patch1:           0001-build-Link-against-lrt.patch
 Patch2:           0001-SECURITY-Pass-uid-of-caller-to-polkit.patch
-Patch3:           0001-systemd-remove-unsupported-option-ControlGroup.patch
 
 %description
 RealtimeKit is a D-Bus system service that changes the
@@ -33,7 +30,6 @@ processes.
 %setup -q
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 autoreconf -fvi
@@ -83,18 +79,6 @@ dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesk
 %{_mandir}/man8/*
 
 %changelog
-* Thu Sep 11 2014 Michal Sekletar <msekleta@redhat.com> - 0.11-10
-- turn on hardening flags (#1092529)
-
-* Tue Sep 09 2014 Michal Sekletar <msekleta@redhat.com> - 0.11-9
-- remove unsupported option ControlGroup for systemd unit file (#1095607)
-
-* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.11-8
-- Mass rebuild 2014-01-24
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.11-7
-- Mass rebuild 2013-12-27
-
 * Mon Sep 23 2013 Colin Walters <walters@redhat.com> - 0.11-6
 - CVE-2013-4326
   Resolves: #1005140
