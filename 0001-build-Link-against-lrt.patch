@@ -1,0 +1,26 @@
+From 467f534c8dd3cc0b7ff29fec7f7741ab5e9302cd Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Thu, 22 Aug 2013 16:44:39 -0400
+Subject: [PATCH] build: Link against -lrt
+
+dbus.pc used to force this, but no longer does.  Since we use
+mq_getattr(), use it explicitly.
+---
+ Makefile.am |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index febc355..07346d3 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -59,6 +59,7 @@ rtkit_daemon_SOURCES = \
+ 	rtkit-daemon.c rtkit.h \
+ 	sd-daemon.c sd-daemon.h
+ rtkit_daemon_LDADD = \
++	-lrt \
+ 	$(DBUS_LIBS)
+ rtkit_daemon_CFLAGS = \
+ 	$(AM_CFLAGS) \
+-- 
+1.7.1
+
